@@ -1,0 +1,216 @@
+{
+  "template_version": "1.0",
+  "template_name": "printer_vlan_deployment",
+  "description": "Template for automating printer VLAN rollout per site. Replace placeholders; duplicate sites[] entries per location.",
+
+  "defaults": {
+    "vlan": {
+      "purpose": "printers",
+      "type": "access",
+      "dhcp_enabled": true,
+      "multicast_enabled": false
+    },
+    "switch_port": {
+      "template_name": "printer_standard",
+      "description": "Printer",
+      "switchport_mode": "access",
+      "switchport_access_vlan": 972,
+      "qos": {
+        "srr_queue_bandwidth_share": [1, 30, 35, 5],
+        "priority_queue_out": true,
+        "mls_qos_trust": "cos",
+        "auto_qos_trust": true
+      },
+      "spanning_tree": {
+        "portfast": "edge"
+      },
+      "ios_config": [
+        "description Printer",
+        "switchport access vlan 972",
+        "switchport mode access",
+        "srr-queue bandwidth share 1 30 35 5",
+        "priority-queue out",
+        "mls qos trust cos",
+        "auto qos trust",
+        "spanning-tree portfast edge"
+      ]
+    },
+    "security": {
+      "client_isolation": true,
+      "internet_access": false,
+      "allowed_egress": ["print_servers", "dns", "ntp"]
+    },
+    "monitoring": {
+      "snmp_enabled": true,
+      "syslog_enabled": true
+    }
+  },
+
+  "naming": {
+    "vlan_name_pattern": "VLAN-PRINT-{site_id}",
+    "port_description_pattern": "PRN-{printer_id}-{location}",
+    "dhcp_scope_name_pattern": "DHCP-PRINT-{site_id}",
+    "switch_hostname_pattern": "{site_id}_{building}-F{floor}-{stack_id}-{stack_member}",
+    "switch_hostname_convention": {
+      "site_id": "Country + site code, e.g. UK_MQ079",
+      "building": "Building code after underscore, e.g. AS07 → UK_MQ079_AS07",
+      "floor": "Floor after hyphen, e.g. F05 → -F05",
+      "stack_id": "Rack/stack identifier, e.g. R1",
+      "stack_member": "Stack position: 1 = primary, 2 = second member in a 2-switch stack",
+      "example_primary": "UK_MQ079_AS07-F05-R1-1",
+      "example_stack_member_2": "UK_MQ079_AS07-F05-R1-2"
+    }
+  },
+
+  "sites": [
+    {
+      "site_id": "UK_MQ079",
+      "site_name": "Example Office",
+      "timezone": "Europe/London",
+      "contacts": {
+        "network_owner": "network-team@example.com",
+        "site_contact": "facilities@example.com"
+      },
+
+      "vlans": [
+        {
+          "vlan_id": 972,
+          "vlan_name": "VLAN-PRINT-UK_MQ079",
+          "subnet": "10.120.0.0/24",
+          "gateway": "10.120.0.1",
+          "vrf": null,
+          "dhcp_scope": {
+            "enabled": true,
+            "start": "10.120.0.50",
+            "end": "10.120.0.200",
+            "lease_days": 7,
+            "options": {
+              "dns_servers": ["10.1.1.10", "10.1.1.11"],
+              "domain_name": "printers.example.local",
+              "default_router": "10.120.0.1"
+            }
+          },
+          "allowed_services": [
+            { "name": "raw_printing", "protocol": "tcp", "port": 9100 },
+            { "name": "ipp", "protocol": "tcp", "port": 631 },
+            { "name": "snmp", "protocol": "udp", "port": 161 }
+          ],
+          "firewall_rules": [
+            {
+              "direction": "ingress",
+              "source": "print_servers",
+              "destination": "vlan_subnet",
+              "action": "allow"
+            },
+            {
+              "direction": "ingress",
+              "source": "user_subnets",
+              "destination": "vlan_subnet",
+              "ports": [9100, 631],
+              "action": "allow"
+            }
+          ]
+        }
+      ],
+
+      "switches": [
+        {
+          "hostname": "UK_MQ079_AS07-F05-R1-1",
+          "site_id": "UK_MQ079",
+          "building": "AS07",
+          "floor": "F05",
+          "stack_id": "R1",
+          "stack_member": 1,
+          "management_ip": "10.0.0.10",
+          "vendor": "cisco",
+          "model": "C9200",
+          "ports": [
+            {
+              "port_id": "GigabitEthernet1/0/24",
+              "enabled": true,
+              "vlan_id": 972,
+              "printer_ref": "PRN-001",
+              "description": "Printer",
+              "interface_template": "printer_standard",
+              "override": {}
+            }
+          ]
+        },
+        {
+          "hostname": "UK_MQ079_AS07-F05-R1-2",
+          "site_id": "UK_MQ079",
+          "building": "AS07",
+          "floor": "F05",
+          "stack_id": "R1",
+          "stack_member": 2,
+          "management_ip": "10.0.0.11",
+          "vendor": "cisco",
+          "model": "C9200",
+          "ports": []
+        }
+      ],
+
+      "printers": [
+        {
+          "printer_id": "PRN-001",
+          "asset_tag": "AT-12345",
+          "hostname": "prn-reception-01",
+          "mac_address": "00:11:22:33:44:55",
+          "serial_number": "SN-REPLACE-ME",
+          "manufacturer": "HP",
+          "model": "LaserJet Pro M404dn",
+          "location": "Reception",
+          "building": "AS07",
+          "floor": "F05",
+          "vlan_ref": 972,
+          "ip_assignment": "dhcp_reservation",
+          "reserved_ip": "10.120.0.50",
+          "switch_ref": {
+            "hostname": "UK_MQ079_AS07-F05-R1-1",
+            "stack_member": 1,
+            "port_id": "GigabitEthernet1/0/24"
+          },
+          "driver_package": "HP Universal Print Driver PCL6",
+          "queue_name": "\\\\print-server\\PRN-001-Reception",
+          "notes": ""
+        }
+      ]
+    }
+  ],
+
+  "references": {
+    "print_servers": [
+      { "hostname": "print01", "ip": "10.1.10.10", "role": "primary" }
+    ],
+    "user_subnets": [
+      "10.10.0.0/16"
+    ]
+  },
+
+  "deployment": {
+    "dry_run": true,
+    "rollback_on_failure": true,
+    "steps": [
+      { "id": "validate_input", "enabled": true },
+      { "id": "create_vlan", "enabled": true },
+      { "id": "configure_dhcp_scope", "enabled": true },
+      { "id": "apply_firewall_rules", "enabled": true },
+      { "id": "configure_switch_ports", "enabled": true },
+      { "id": "create_dhcp_reservations", "enabled": true },
+      { "id": "verify_connectivity", "enabled": true },
+      { "id": "register_print_queue", "enabled": false }
+    ],
+    "verification": {
+      "ping_gateway": true,
+      "ping_reserved_ip_after_boot": true,
+      "test_print_port": { "protocol": "tcp", "port": 9100, "timeout_seconds": 5 }
+    }
+  },
+
+  "audit": {
+    "created_by": "",
+    "created_at": "",
+    "change_ticket": "",
+    "approved_by": ""
+  }
+}

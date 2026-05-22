@@ -1,0 +1,81 @@
+---
+# Lab workflow for EVE-NG:
+#   1. python scripts/validate.py
+#   2. python scripts/generate_config.py
+#   3. ansible-playbook -i inventory.lab.yml playbook-lab.yml --check
+#   4. ansible-playbook -i inventory.lab.yml playbook-lab.yml
+#
+# Requires: pip install -r requirements.txt
+#           ansible-galaxy collection install cisco.ios ansible.netcommon
+
+- name: Validate and preview printer VLAN configs
+  hosts: localhost
+  gather_facts: false
+  vars:
+    deployment_json: "{{ playbook_dir }}/../data/printer-vlan-deployment.json"
+    generated_dir: "{{ playbook_dir }}/../output/generated"
+  tasks:
+    - name: Validate deployment JSON
+      ansible.builtin.command:
+        cmd: python "{{ playbook_dir }}/../scripts/validate.py" "{{ deployment_json }}"
+      register: validate_result
+      changed_when: false
+
+    - name: Generate IOS config files
+      ansible.builtin.command:
+        cmd: python "{{ playbook_dir }}/../scripts/generate_config.py" "{{ deployment_json }}" -o "{{ generated_dir }}"
+      register: generate_result
+      changed_when: false
+
+    - name: Show generated files
+      ansible.builtin.find:
+        paths: "{{ generated_dir }}"
+        patterns: "*.cfg"
+      register: cfg_files
+
+    - name: Preview config paths
+      ansible.builtin.debug:
+        msg: "{{ item.path }}"
+      loop: "{{ cfg_files.files }}"
+      loop_control:
+        label: "{{ item.path | basename }}"
+
+- name: Apply printer port configs to EVE-NG lab switches
+  hosts: lab_switches
+  gather_facts: false
+  vars:
+    generated_dir: "{{ playbook_dir }}/../output/generated"
+    # Keep true until lab is ready; override with: -e deployment_dry_run=false
+    deployment_dry_run: true
+  tasks:
+    - name: Load generated config for this switch
+      ansible.builtin.set_fact:
+        switch_cfg_file: "{{ generated_dir }}/{{ inventory_hostname }}.cfg"
+
+    - name: Confirm config file exists
+      ansible.builtin.stat:
+        path: "{{ switch_cfg_file }}"
+      delegate_to: localhost
+      register: cfg_stat
+
+    - name: Fail if no config generated for host
+      ansible.builtin.fail:
+        msg: "Missing {{ switch_cfg_file }} — run generate_config.py first"
+      when: not cfg_stat.stat.exists
+
+    - name: Push interface config (check mode / dry-run)
+      cisco.ios.ios_config:
+        src: "{{ switch_cfg_file }}"
+        match: none
+        replace: block
+      check_mode: true
+      register: push_check
+      when: deployment_dry_run | default(true) | bool
+
+    - name: Push interface config (apply)
+      cisco.ios.ios_config:
+        src: "{{ switch_cfg_file }}"
+        match: none
+        replace: block
+      register: push_apply
+      when: not (deployment_dry_run | default(true) | bool)

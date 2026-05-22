@@ -1,0 +1,17 @@
+# Copy to inventory.lab.yml and set EVE-NG management IPs / credentials.
+---
+all:
+  children:
+    lab_switches:
+      hosts:
+        UK_MQ079_AS07-F05-R1-1:
+          ansible_host: 192.168.122.101
+        UK_MQ079_AS07-F05-R1-2:
+          ansible_host: 192.168.122.102
+      vars:
+        ansible_connection: ansible.netcommon.network_cli
+        ansible_network_os: cisco.ios.ios
+        ansible_user: admin
+        ansible_password: admin
+        ansible_become: true
+        ansible_become_method: enable
