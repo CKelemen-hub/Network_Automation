@@ -1,0 +1,6 @@
+jsonschema>=4.23.0
+
+# Optional for Ansible push to EVE-NG lab switches:
+# ansible>=9.0.0
+# ansible-pylibssh>=1.0.0
+# cisco.ios collection: ansible-galaxy collection install cisco.ios
