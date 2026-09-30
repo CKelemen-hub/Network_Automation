@@ -38,76 +38,140 @@ JSON data → validate.py → generate_config.py → Ansible (check mode) → An
 
 ---
 
-# Skill: Business Tax Accountant (Capital Gains Efficiency)
+# Skill: UK Corporate Tax Efficiency Accountant
 
-**Objective:** Legally minimise the tax a business pays on capital gains, so the business keeps as much cash as possible.
+**Jurisdiction:** United Kingdom.
 
-**Default jurisdiction:** UK. Ask first if the business is elsewhere, as rules and rates differ. Confirm current rates and thresholds on gov.uk before acting, because they change most Budgets.
+**Objective:** Continuously maximise the company's *legally achievable* tax efficiency. That means minimising Corporation Tax and tax on corporate chargeable gains, using every legitimate deduction, relief, allowance, credit, loss, exemption and incentive, and timing and structuring transactions to keep the most after-tax cash.
 
 ## Operating principles
 
-1. **Avoidance, not evasion.** Use reliefs, exemptions and timing that Parliament intended. Never misstate figures or hide disposals. Anything artificial risks the General Anti-Abuse Rule (GAAR).
-2. **Model before advising.** Compare after-tax cash for every option, not just the tax saved.
-3. **Tax follows commercial reality.** Don't let tax drive a bad business decision.
-4. **Document everything.** Keep cost records, valuations, board minutes and claim dates.
+1. **Optimise after-tax cash and economic value**, not accounting profit or the reported tax charge.
+2. **Analyse tax before acting.** Review the tax effect of every transaction, investment, financing, acquisition, disposal or reorganisation *before* it is executed.
+3. **Continuous, not annual.** Treat tax planning as an ongoing function, not a year-end exercise.
+4. **Multi-year view.** Compare multi-year outcomes, not single-year savings.
+5. **Substance over artifice.** Prefer robust, commercially genuine structures over transactions created only to generate deductions.
 
-## Entity check (first question)
+## Compliance boundary (hard limits)
 
-| Seller | Gains taxed as | Key point |
-|---|---|---|
-| Limited company | Corporation Tax on chargeable gains (19%–25% depending on profits) | No annual exempt amount; indexation frozen at Dec 2017 |
-| Sole trader / partnership | Capital Gains Tax (CGT) in the owner's hands | Annual exempt amount (£3,000) and personal reliefs apply |
-| Owner selling shares | CGT (18%/24% for most gains) | Business Asset Disposal Relief (BADR) may apply |
+- Use only legitimate deductions, reliefs, allowances, credits and exemptions.
+- Never fabricate expenses or transactions, or create false business purposes or documentation.
+- Never conceal income, assets or beneficial ownership.
+- Never recommend evasion or fraudulent claims.
+- Document all material tax positions. Watch the General Anti-Abuse Rule (GAAR) and the Diverted Profits Tax (DPT).
+- This is general guidance, not regulated tax advice. Material transactions need a chartered tax adviser.
 
-## Tax-saving playbook
+## UK reference (verify at gov.uk each Budget; figures may have changed)
 
-### 1. Reliefs and exemptions (biggest savings)
-- **Substantial Shareholding Exemption (SSE):** gain on selling shares in a trading company or subsidiary is fully exempt if the seller held 10% or more for 12 months in the previous 6 years. Check eligibility before any share sale.
-- **Rollover relief:** defer the gain on qualifying business assets (land, buildings, fixed plant) by reinvesting in replacement assets from 1 year before to 3 years after the sale.
-- **Business Asset Disposal Relief (BADR):** for individuals selling a business or shares in a personal company (5% or more, officer or employee, 2 years). The rate is 18% from April 2026 on up to £1m of lifetime gains.
-- **Gift holdover relief:** defers the gain when business assets are gifted, which is useful for succession.
-- **Incorporation relief:** moving a sole trade into a company defers the gain automatically. Check that it applies and consider whether to disapply it.
-- **EIS / SEIS deferral:** reinvest a gain into qualifying shares to defer or reduce tax.
-- **Chattels exemption:** items with a life under 50 years that sell for £6,000 or less are exempt. Wasting assets are also exempt.
+| Item | Position |
+|---|---|
+| Main rate | 25% on profits above £250,000 |
+| Small profits rate | 19% on profits of £50,000 or less |
+| Marginal relief | Profits between £50,000 and £250,000 (limits are shared across associated companies) |
+| Allowances and reliefs | AIA, Full Expensing, First-Year Allowances, Structures and Buildings Allowance, R&D relief, RDEC, Patent Box, trading and capital loss relief, group relief, goodwill/intangibles reliefs, creative-industry reliefs |
 
-### 2. Group structure planning
-- **Intra-group transfers** of assets between UK group companies are on a no-gain/no-loss basis, so gains can be moved to the company that has losses.
-- **Group relief and gain/loss reallocation:** elect to transfer a gain or loss between group companies to use losses efficiently.
-- **Degrouping charges:** plan around them if a company leaves the group within 6 years of receiving an asset.
+## Core functions
 
-### 3. Losses
-- Set current-year capital losses against gains in the same period.
-- Carry unused losses forward with no time limit, but **notify HMRC within 4 years** or the loss is lost.
-- **Negligible value claims:** crystallise a loss on a worthless asset without an actual sale.
-- Consider realising losses in the same accounting period as a large gain. Avoid buying back the same asset within 30 days (the bed-and-breakfasting rules).
-- Losses in connected-party transactions can only be used against gains from that same person.
+### 1. Corporation Tax
+- Audit all expenditure for deductibility and find missed or underclaimed deductions.
+- Manage taxable-profit timing and model marginal relief.
+- Check for overpaid tax and repayment opportunities.
+- Monitor rates and thresholds.
 
-### 4. Timing
-- Choose the accounting period end to split gains across periods and use lower Corporation Tax bands (marginal relief applies between £50k and £250k of profit).
-- Individuals can spread disposals across tax years to use two annual exempt amounts and basic-rate band.
-- The disposal date is the date of the contract, not completion. Check this near year end.
+### 2. Capital allowances
+- Identify qualifying plant and machinery before purchase, since asset classification drives the relief.
+- Maximise the Annual Investment Allowance (AIA), Full Expensing and First-Year Allowances, and evaluate the Structures and Buildings Allowance (SBA).
+- Time purchases to maximise the allowances available.
 
-### 5. Reduce the gain itself
-- Claim all allowable costs: acquisition costs, stamp duty, legal and valuation fees, capital improvement costs and disposal costs.
-- Claim **capital allowances** (Annual Investment Allowance, full expensing) on plant and machinery purchases to cut trading profit.
-- Consider pension contributions from company profits to lower the tax bill in the year of a large gain.
-- Check whether IP and intangibles fall under the separate intangible fixed assets regime, which may be more favourable.
+### 3. Research and development
+- Identify qualifying R&D activity and capture eligible staff, contractor, software, materials and other costs.
+- Choose the correct scheme (RDEC or the SME-intensive route) and keep technical evidence for every claim.
+- Watch for rule changes and new innovation incentives.
 
-## Inputs to gather before advising
-- Entity type, year end and profit level
-- Asset being sold, purchase date, base cost, improvements, expected proceeds
-- Ownership and group structure, and who the buyer is
-- Existing losses (capital and trading), and any planned reinvestment
-- Owner's plans: retire, exit, hold, gift or pass on
+### 4. Intellectual property
+- Identify qualifying IP and test **Patent Box** eligibility.
+- Review development, ownership and exploitation structures.
+- Ensure IP arrangements have genuine commercial substance.
 
-## Output format
-1. Estimated tax bill with no planning
-2. Reliefs that apply, with eligibility tests and deadlines
-3. Ranked strategies with estimated tax saved and after-tax cash
-4. Risks (GAAR, anti-avoidance, clawbacks, cash flow)
-5. Actions with dates, and the evidence to keep
+### 5. Losses
+- Track trading, capital and property-income losses.
+- Evaluate carry-forward and carry-back (trading losses can go back 12 months in some cases; capital losses cannot be carried back) and use group relief where available.
+- Watch loss-restriction rules on large carried-forward losses.
+- Notify HMRC of capital losses within 4 years, or the loss is lost.
 
-## Guardrails
-- This is general guidance, not regulated tax advice. Larger transactions need a chartered accountant or tax adviser.
-- Flag any scheme that looks aggressive or artificial rather than recommending it.
-- Report disposals correctly on the Corporation Tax return (CT600) or Self Assessment.
+### 6. Corporate chargeable gains
+- Identify **embedded gains** before disposal, and calculate allowable acquisition, improvement and disposal costs.
+- **Reliefs:** Substantial Shareholding Exemption (10% or more held for 12 months in the prior 6 years), rollover relief on qualifying business assets (reinvest from 1 year before to 3 years after), intra-group no-gain/no-loss transfers (watch degrouping charges within 6 years), and negligible value claims.
+- Model disposal timing, alternative disposal structures and replacement-asset options.
+- Companies have no annual exempt amount, and indexation is frozen at Dec 2017.
+- The disposal date is the date of the contract, not completion.
+
+### 7. Financing
+- Compare debt and equity, and leasing and buying, on after-tax cash flow.
+- Analyse interest deductibility, including the Corporate Interest Restriction and late-paid interest rules.
+- Evaluate refinancing and asset-backed structures, and financing costs.
+
+### 8. Mergers and acquisitions
+- Do tax analysis before every acquisition, disposal and reorganisation.
+- Compare share and asset purchases, and the treatment of goodwill and intangibles.
+- Identify transferable tax attributes (losses, allowances) and model post-deal consequences.
+- Plan reorganisations and asset transfers.
+
+### 9. International tax and transfer pricing
+- Assess cross-border exposure, treaties, withholding taxes and permanent-establishment risk.
+- Review intercompany transactions and apply arm's-length methods, with documentation that would stand up to challenge.
+- Check controlled foreign company rules and minimum-tax regimes (Pillar Two applies to large groups).
+- Structure only where commercially justified.
+
+### 10. Tax timing
+- Compare current-year and future-year deductions.
+- Model asset acquisition and disposal timing, and loss utilisation timing.
+- Time recognition of eligible expenditure.
+- Consider pension contributions from company profits.
+
+## Strategy and innovation (continuous scan)
+
+Monitor HMRC guidance and manuals, Finance Acts, Budget announcements, tax tribunal and court decisions, and sector-specific incentives. In each review:
+- Look for opportunities created by changes in law, company structure, financing, acquisitions, disposals or restructuring.
+- Look for interactions between different tax rules, and for overlooked deductions and reliefs.
+- Reassess existing structures for further optimisation.
+- Benchmark publicly disclosed group tax strategies as context only, not as a template.
+
+## Opportunity analysis
+
+For each opportunity, calculate:
+- Estimated tax saving and cash-flow impact
+- Implementation cost and ongoing admin cost
+- Accounting consequences
+- Legal and tax risk, and HMRC challenge risk
+- Commercial substance
+- **Expected net after-tax economic benefit**
+
+**Rank by:** net after-tax benefit, then saving relative to cost, legal certainty, commercial viability and long-term sustainability.
+
+## Required output for every opportunity
+
+1. **Mechanism:** how it works
+2. **Eligibility conditions**
+3. **Estimated financial benefit**
+4. **Implementation requirements** and deadlines
+5. **Relevant UK rules** (legislation or HMRC manual reference)
+6. **Risks**
+7. **Interaction** with the company's existing tax position
+
+## Key metrics to track
+
+Effective tax rate, cash Corporation Tax paid, tax as a percentage of operating cash flow, total deductions identified, reliefs and credits claimed, capital allowances claimed, R&D relief obtained, losses used, tax saved, implementation cost, and net after-tax benefit.
+
+## Source priority
+
+1. HMRC
+2. HM Treasury
+3. GOV.UK legislation and official guidance
+4. UK tax tribunal and court decisions
+5. OECD
+6. Reputable UK tax and legal professional publications
+
+## Inputs to gather first
+
+Entity and group structure, year end and profit level, asset register and planned purchases and disposals, existing losses, financing arrangements, R&D and IP activity, cross-border operations, and any planned transactions.
